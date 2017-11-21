@@ -18,7 +18,7 @@ And add them to git
 
     git add foo.txt bar.txt
 
-You should already have git-lfs [installed](Installation), but you should be sure that you have git-lfs setup correctly in your git configuration files by using the `git lfs install` command:
+You should already have git-lfs [installed](Installation). To ensure that git-lfs is setup correctly in your git configuration files use the `git lfs install` command:
 
     git lfs install
 
