@@ -13,14 +13,21 @@ Let's create some more files
 
     ls > foo.txt
     ls > bar.txt
-    ls > cat.bin
-    ls > dog.bin
 
 And add them to git
 
-    git add foo.txt bar.txt cat.bin dog.bin
+    git add foo.txt bar.txt
 
-Now we are going to decide that `*.bin` files are large files that we want git-lfs to track them. Tracking means that in subsequent commits, these files will now be LFS files. 
+You should already have git-lfs [installed](Installation), but you should be sure that you have git-lfs setup correctly in your git configuration files by using the `git lfs install` command:
+
+    git lfs install
+
+Now let's add some large files to be tracked by git-lfs:
+
+    head -c 1M /dev/urandom > cat.bin
+    head -c 1M /dev/urandom > dog.bin
+
+Now we are going ensure that git-lfs is tracking the large `*.bin` files we just created. Tracking means that in subsequent commits, these files will now be LFS files.
 
 *Note: This does NOT mean that versions of the files in previous commits will be converted. That involves a process commonly known as "rewriting history" and is described in the [migration section](#migrating-existing-repository-data-to-lfs).*
 
@@ -37,9 +44,9 @@ Listing tracked paths
     *.bin (.gitattributes)
 ```
 
-To see the list of files being track by git-lfs, run `git lfs ls-files`. You will see that this list is currently empty. This is because technically the file isn't an lfs object until after you commit it. 
+To see the list of files being track by git-lfs, run `git lfs ls-files`. You will see that this list is currently empty. This is because technically the file isn't an lfs object until after you commit it.
 
-Next, you need to add `.gitattributes` to your git repository. `git lfs track` stores the tracked files patterns in `.gitattributes`. This way when the repo is cloned, the track files patterns are preserved. Since the bin files were added before Git LFS was tracking `*.bin` files, they need to be added again to the Git index:
+Next, you need to add `.gitattributes` to your git repository. `git lfs track` stores the tracked files patterns in `.gitattributes`. This way when the repo is cloned, the track files patterns are preserved. We can also add the `*.bin` files now that they are tracked via git-lfs.
 
     git add .gitattributes "*.bin"
 
@@ -96,7 +103,7 @@ The endpoint identifies the server URL the lfs objects are sent to. When using a
     git config -f .lfsconfig lfs.url https://my_other_server.example.com/foo/bar/info/lfs
     git add .lfsconfig
 
-Now, `git lfs env` shows: 
+Now, `git lfs env` shows:
 
 ```
 git-lfs/1.1.1 (GitHub; windows amd64; go 1.5.3; git 7de0397)
