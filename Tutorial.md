@@ -77,7 +77,7 @@ f05131d24d * cat.bin
 
 ## LFS URL ##
 
-When using a git server that supports lfs, the lfs url defaults upon clone/adding a remote. However, sometimes the LFS server and git server are two separate services (such as the [lfs-test-server](https://github.com/github/lfs-test-server). 
+When using a git server that supports lfs, the lfs url defaults upon clone/adding a remote. However, sometimes the LFS server and git server are two separate services (such as the [lfs-test-server](https://github.com/github/lfs-test-server)). 
 
 To see the lfs url, run `git lfs env`
 
