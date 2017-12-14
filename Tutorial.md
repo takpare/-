@@ -222,6 +222,15 @@ git lfs migrate import --include="*.mp4" --include-ref=refs/heads/master --inclu
 git push
 ```
 
+### Cleaning up the .git directory after migrating
+
+The above successfully converts pre-existing git objects to lfs objects. However, the regular objects still persist in the .git directory. These will be cleaned up eventually by git, but to clean them up right away, run:
+
+```
+git reflog expire --expire-unreachable=now --all
+git gc --prune=now
+```
+
 ## Pulling and cloning ##
 
 Once git lfs is installed, to clone an LFS repo, just run a normal `git clone` command
